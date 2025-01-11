@@ -40,6 +40,18 @@ router.get('/index',async function(req, res, next){
   res.render('index', { title: 'Express'});
 });
 
+router.post('/index',async function(req, res, next){
+
+  notifier.notify({
+    title: 'Book Appointment',
+    message: 'Login to Book Appointment',
+    sound: true,
+    wait: true,
+    type: 'info'
+  });
+  res.render('sign_in', { title: 'Express'});
+});
+
 router.get('/home', async function(req, res, next){
 
   try {
@@ -308,34 +320,62 @@ router.post('/book_appointment', async function(req, res) {
           pat_email
       } = req.body;
 
-      // Validate required fields
       if (!pat_name || !pat_mobileNumber || !pat_age || !pat_apoi_date ||
           !sel_doctor || !sel_department || !pat_email) {
-          return res.status(400).json({ error: 'All fields are required' });
+          return notifier.notify({
+              title: 'Book Appointment',
+              message: 'All fields are required',
+              sound: true,
+              wait: true,
+              type: 'info'
+          });
+          // return res.status(400).json({ error: 'All fields are required' });
+      }
+
+      // Check if a similar appointment already exists
+      const findPt = await book_appointment_model.find({ pat_email: pat_email });
+
+      if (findPt.length > 0) {
+          console.log("===============" + findPt[0].status);
+          if (findPt[0].status == 'approve' || findPt[0].status == 'pending') {
+              notifier.notify({
+                  title: 'Book Appointment',
+                  message: 'Appointment request already sent',
+                  sound: true,
+                  wait: true,
+                  type: 'info'
+              });
+              return res.redirect('/home'); // Ensure further processing stops
+          } else {
+            const id = {
+              _id : findPt[0]._id
+            }
+            await book_appointment_model.findByIdAndDelete(id);
+          }
       }
 
       // Create appointment object
       const obj = {
-          pat_name: req.body.pat_name,
-          pat_mobileNumber: req.body.pat_mobileNumber,
-          pat_age: req.body.pat_age,
-          pat_apoi_date: req.body.pat_apoi_date,
-          sel_doctor: req.body.sel_doctor,
-          sel_department: req.body.sel_department,
-          pat_email: req.body.pat_email,
-      }
+          pat_name,
+          pat_mobileNumber,
+          pat_age,
+          pat_apoi_date,
+          sel_doctor,
+          sel_department,
+          pat_email
+      };
 
       // Save to database
       const patData = await book_appointment_model.create(obj);
       console.log(patData);
 
-      res.redirect('/home');
-      // res.json({ success: true, message: 'Appointment booked successfully' });
+      return res.redirect('/home'); // Ensure no further response is sent
   } catch (error) {
       console.error('Error:', error);
       res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 
 
