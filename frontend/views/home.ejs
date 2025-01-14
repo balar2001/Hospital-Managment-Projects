@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"> -->
 
-    
-
 </head>
 <body>
 
@@ -95,7 +93,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarMenu">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                            <li class="nav-item"><a class="nav-link" href="appoiment">Services</a></li>
                             <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
                             <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
                             <li class="nav-item dropdown">
@@ -141,8 +139,7 @@
                     <p class="sub-title">Contrary to popular belief, Lorem Ipsum is not simply random text.</p><br>
                     <button class="btn btn-primary btn-round">View More</button>
                 </div>
-                
-                <form action="book_appointment" method="post" id="appointmentForm" >
+                <!-- <form action="book_appointment" method="post" id="appointmentForm" >
                     <div class="slider_form row">
                         <p class="col-12">Make an Appointment</p>
                         <div class="col-lg-4 col-md-6">
@@ -194,7 +191,7 @@
                                 <input type="text" value="" placeholder="Enter email ID" class="form-control m-b-15" name="pat_email">
                             </div>
                         </div>
-                        <!-- <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
                             <form action="https://thememakker.com/" id="frmFileUpload" class="dropzone" method="post" enctype="multipart/form-data">
                                 <div class="dz-message">
                                     <div class="drag-icon-cph"> <i class="material-icons">touch_app</i> </div>
@@ -204,234 +201,146 @@
                                     <input name="file" type="file" multiple />
                                 </div>
                             </form>
-                        </div> -->
+                        </div>
                         <div class="col-lg-4 col-md-6">
                             <input type="submit" class="btn btn-primary btn-round btn-block m-t-0 m-b-0" style="margin-top: 30px;" value="submit" name="sent" >
                         </div>
                     </div>
-                </form>
+                </form> -->
+                <form action="book_appointment" method="post" id="appointmentForm">
+                    <div class="slider_form row" style="border-radius: 20px;">
+                        <p class="col-12 text-center w-100" style="font-size: 25px; font-weight: 500;">Make an Appointment</p>
+                        <!-- First Name and Last Name -->
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="margin-left: 10px;">First Name</label>
+                                <input type="text" class="form-control" placeholder="First Name" name="pat_fname">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="margin-left: 10px;">Middle Name</label>
+                                <input type="text" class="form-control" placeholder="Last Name" name="pat_mname">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="margin-left: 10px;">Last Name</label>
+                                <input type="text" class="form-control" placeholder="Last Name" name="pat_lname">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="margin-left: 10px;">Email</label>
+                                <input type="text" class="form-control" placeholder="Last Name" name="pat_email">
+                            </div>
+                        </div>
+                
+                        <!-- Date of Birth and Gender -->
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label style="margin-left: 10px;">Date of Birth</label>
+                                <input type="Date" class="form-control" placeholder="Date of Birth" name="pat_dob">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label style="margin-left: 10px;">Gender</label>
+                            <select class="form-control" name="pat_gender">
+                                <option value="">- Gender -</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                
+                        <!-- Age and Mobile -->
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="margin-left: 10px;">Age</label>
+                                <input type="text" class="form-control" placeholder="Enter Age" name="pat_age">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="margin-left: 10px;">Mobile Number</label>
+                                <input type="text" class="form-control" placeholder="Enter Mobile" name="pat_mobileNumber">
+                            </div>
+                        </div>
+                
+                        <!-- Appointment Date and Time Slot -->
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="margin-left: 10px;">Appointment Date</label>
+                                <input type="date" class="form-control" placeholder="Appointment Date" name="pat_appointmentDate">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label style="margin-left: 10px;">Appointment Time Sloat</label>
+                            <select class="form-control" name="pat_appointmentTime">
+                                <option selected="selected">Select Time Slot</option>
+                                <option value="09:00-09:30">09:00 AM - 09:30 AM</option>
+                                <option value="09:30-10:00">09:30 AM - 10:00 AM</option>
+                                <option value="10:00-10:30">10:00 AM - 10:30 AM</option>
+                                <option value="10:30-11:00">10:30 AM - 11:00 AM</option>
+                                <option value="11:00-11:30">11:00 AM - 11:30 AM</option>
+                                <option value="11:30-12:00">11:30 AM - 12:00 PM</option>
+                                <option value="02:00-02:30">02:00 PM - 02:30 PM</option>
+                                <option value="02:30-03:00">02:30 PM - 03:00 PM</option>
+                                <option value="03:00-03:30">03:00 PM - 03:30 PM</option>
+                                <option value="03:30-04:00">03:30 PM - 04:00 PM</option>
+                            </select>
+                        </div>
+                
+                        <!-- Doctor and Department -->
+                        <div class="col-sm-6">
+                            <label style="margin-left: 10px;">Select Doctor</label>
+                            <select class="form-control" name="sel_doctor">
+                                <option selected="selected">Select Doctor</option>
+                                <option>Marc Parcival</option>
+                                <option>Alen Bailey</option>
+                                <option>Basil Andrew</option>
+                                <option>Giles Franklin</option>
+                                <option>Edgar Denzil</option>
+                                <option>Garfield Feris</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label style="margin-left: 10px;">Select Department</label>
+                            <select class="form-control" name="sel_department">
+                                <option selected="selected">Select Department</option>
+                                <option>Cardiology</option>
+                                <option>Pulmonology</option>
+                                <option>Gynecology</option>
+                                <option>Neurology</option>
+                                <option>Urology</option>
+                                <option>Gastrology</option>
+                                <option>Pediatrician</option>
+                                <option>Laboratory</option>
+                            </select>
+                        </div>
+                
+                        <!-- Message Box -->
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <textarea rows="4" class="form-control" placeholder="Please type what you want..." name="pat_message"></textarea>
+                            </div>
+                        </div>
+                
+                             <!-- <div class="col-sm-4" style="margin-left: 160px;">
+                                 <input type="submit" class="btn btn-primary btn-round btn-block" value="Submit" name="sent">
+                             </div>
+                             <div class="col-sm-4">
+                                 <input type="reset" class="btn btn-primary btn-round btn-block" value="reset" name="sent">
+                             </div> -->
 
-                <!-- <script>
-                    const form = document.getElementById('appointmentForm');
-                    form.addEventListener('submit', function (event) {
-                      event.preventDefault(); // Prevent default form submission
-                  
-                      const formData = new FormData(form);
-                      const pat_name = formData.get('pat_name').trim();
-                      const pat_mobileNumber = formData.get('pat_mobileNumber').trim();
-                      const pat_age = formData.get('pat_age').trim();
-                      const pat_apoi_date = formData.get('pat_apoi_date').trim();
-                      const sel_doctor = formData.get('sel_doctor').trim();
-                      const sel_department = formData.get('sel_department').trim();
-                      const pat_email = formData.get('pat_email').trim();
-                  
-                      // Client-side validation
-                      if (!pat_name) {
-                        alert('Please enter a name');
-                        return;
-                      }
-                      if (!pat_mobileNumber) {
-                        alert('Please enter a mobile number');
-                        return;
-                      }
-                      if (!pat_age) {
-                        alert('Please enter an age');
-                        return;
-                      }
-                      if (!pat_apoi_date) {
-                        alert('Please select a date');
-                        return;
-                      }
-                      if (!sel_doctor) {
-                        alert('Please select a doctor');
-                        return;
-                      }
-                      if (!sel_department) {
-                        alert('Please select a department');
-                        return;
-                      }
-                      if (!pat_email) {
-                        alert('Please enter an email');
-                        return;
-                      }
-                  
-                      // Submit the form via JavaScript
-                      fetch('book_appointment', {
-                        method: 'POST',
-                        body: formData,
-                      })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            if (data.error) {
-                                alert(data.error);
-                            } else {
-                                alert(data.message || 'Appointment booked successfully');
-                                window.location.href = '/home';
-                            }
-                        })
-
-                        .catch((error) => {
-                          alert('An error occurred while booking the appointment');
-                          console.error(error);
-                        });
-                    });
-                  </script> -->
-            
-                
-                  <!-- <form action="book_appointment" method="post" id="appointmentForm">
-                    <div class="slider_form row">
-                        <p class="col-12 text-center font-weight-bold">Make an Appointment</p>
-                        
-                        
-                        <div class="col-lg-4 col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control m-b-15" name="pat_name" placeholder="Enter Name" required>
+                        <div class="row">
+                            <div class="col-sm-12 ">
+                                <button type="submit" class="btn btn-primary btn-round">Submit</button>
+                                <button type="reset" class="btn btn-default btn-round btn-simple">Cancel</button>
                             </div>
-                        </div>
-                
-                        
-                        <div class="col-lg-4 col-md-6">
-                            <div class="form-group">
-                                <input type="tel" class="form-control m-b-15" name="pat_mobileNumber" placeholder="Enter Mobile" pattern="[0-9]{10}" required>
-                            </div>
-                        </div>
-                
-                        
-                        <div class="col-lg-4 col-md-6">
-                            <div class="form-group">
-                                <input type="number" class="form-control m-b-15" name="pat_age" placeholder="Enter Age" required>
-                            </div>
-                        </div>
-                
-                        
-                        <div class="col-lg-4 col-md-6">
-                            <div class="form-group">
-                                <input type="date" class="form-control m-b-15" name="pat_apoi_date" required>
-                            </div>
-                        </div>
-                
-                        
-                        <div class="col-lg-4 col-md-6">
-                            <div class="form-group">
-                                <select class="form-control m-b-15" name="sel_doctor" required>
-                                    <option value="" disabled selected>Select Doctor</option>
-                                    <option>Marc Parcival</option>
-                                    <option>Alen Bailey</option>
-                                    <option>Basil Andrew</option>
-                                    <option>Giles Franklin</option>
-                                    <option>Edgar Denzil</option>
-                                    <option>Garfield Feris</option>
-                                </select>
-                            </div>
-                        </div>
-                
-                        
-                        <div class="col-lg-4 col-md-6">
-                            <div class="form-group">
-                                <select class="form-control" name="sel_department" required>
-                                    <option value="" disabled selected>Select Department</option>
-                                    <option>Cardiology</option>
-                                    <option>Pulmonology</option>
-                                    <option>Gynecology</option>
-                                    <option>Neurology</option>
-                                    <option>Urology</option>
-                                    <option>Gastrology</option>
-                                    <option>Pediatrician</option>
-                                    <option>Laboratory</option>
-                                </select>
-                            </div>
-                        </div>
-                
-                        
-                        <div class="col-lg-4 col-md-6">
-                            <div class="form-group">
-                                <input type="email" class="form-control m-b-15" name="pat_email" placeholder="Enter Email ID" required>
-                            </div>
-                        </div>
-                
-                        
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label for="file-upload" class="d-block">Upload Files (Optional)</label>
-                                <input type="file" name="file" id="file-upload" class="form-control-file" multiple>
-                            </div>
-                        </div>
-                
-                        
-                        <div class="col-lg-4 col-md-6 offset-lg-4">
-                            <input type="submit" class="btn btn-primary btn-round btn-block m-t-0" value="Submit" name="sent">
                         </div>
                     </div>
-                </form> -->
-                
-                <!-- <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        background-color: #f4f7f6;
-                        color: #333;
-                    }
-                
-                    .slider_form {
-                        background-color: #fff;
-                        padding: 30px;
-                        border-radius: 10px;
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    }
-                
-                    .form-group input,
-                    .form-group select {
-                        border-radius: 5px;
-                        border: 1px solid #ddd;
-                        padding: 10px;
-                        width: 100%;
-                    }
-                
-                    .form-group input[type="submit"] {
-                        background-color: #007bff;
-                        border: none;
-                        color: #fff;
-                        font-weight: bold;
-                        padding: 12px;
-                        cursor: pointer;
-                    }
-                
-                    .form-group input[type="submit"]:hover {
-                        background-color: #0056b3;
-                    }
-                
-                    .slider_form p {
-                        font-size: 24px;
-                        margin-bottom: 20px;
-                    }
-                
-                    .col-lg-4, .col-md-6 {
-                        padding: 15px;
-                    }
-                
-                    .col-lg-12 {
-                        padding-top: 15px;
-                    }
-                
-                    .dz-message {
-                        text-align: center;
-                        padding: 20px;
-                        background: #f1f1f1;
-                        border: 2px dashed #ccc;
-                        border-radius: 5px;
-                    }
-                
-                    .dz-message h3 {
-                        font-size: 18px;
-                        margin-bottom: 10px;
-                    }
-                
-                    .dz-message em {
-                        font-size: 14px;
-                        color: #777;
-                    }
-                </style> -->
-                
-                </div>
+                </form>   
+            </div>
         </div>
     </section>
 
@@ -439,7 +348,7 @@
     <section class="main-section">
 
         <!-- Home About Us Section -->
-        <div class="about-us-section" style="margin-top: 255px;">
+        <div class="about-us-section" style="margin-top: 520px;">
             <div class="container">
                 <div class="row">
                     <div class="section-title col-12" data-aos="fade-up">

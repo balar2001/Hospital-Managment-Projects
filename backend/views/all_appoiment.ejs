@@ -54,28 +54,37 @@
                                     <thead>
                                         <tr>                                       
                                             <th>Profile</th>
-                                            <th>Nname</th>
+                                            <th>Ful Name</th>
+                                            <th>Email</th>
+                                            <th>DOB</th>
+                                            <th>Gender</th>
+                                            <th>Age</th>
                                             <th>Mobile Number</th>
-                                            <th>age</th>
-                                            <th>Apooiment Date</th>
+                                            <th>Appointment Date</th>
+                                            <th>Appointment Time</th>
                                             <th>Doctor</th>
                                             <th>Department</th>
-                                            <th>Email ID</th>
-                                            <th>Status</th>
+                                            <th>Message</th>
+                                            <th>Mode</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <%pat.forEach(function(pat) { %>
                                             <tr>
                                                 <td><span class="list-icon"><img class="patients-img" src="../assets/images/xs/avatar1.jpg" alt=""></span></td>
-                                                <td><span class="list-name"><%= pat.pat_name %></span></td>
-                                                <td><%= pat.pat_mobileNumber %></td>
+                                                <td><span class="list-name"><%= pat.pat_fname %> <%= pat.pat_mname %> <%= pat.pat_lname %></span></td>
+                                                <td><%= pat.pat_email %></td>
+                                                <td><%= pat.pat_dob %></td>
+                                                <td><%= pat.pat_gender %></td>
                                                 <td><%= pat.pat_age %></td>
-                                                <td><%= pat.pat_apoi_date %></td>
+                                                <td><%= pat.pat_mobileNumber %></td>
+                                                <td style="color: red;"><%= pat.pat_appointmentDate %></td>
+                                                <td style="color: red;"><%= pat.pat_appointmentTime %></td>
                                                 <td><%= pat.sel_doctor %></td>
                                                 <td><%= pat.sel_department %></td>
-                                                <td><%= pat.pat_email %></td>
-
+                                                <td><%= pat.pat_message %></td>
+                                                <td><%= pat.appoiment_mode %></td>
+                                                
                                             <!-- <form action="all_appoiment" method="post">
                                                
                                                 <% if(pat.status == 'pending' ) { %>
@@ -148,97 +157,103 @@
                                 <table class="table m-b-0 table-hover">
                                     <thead>
                                         <tr>                                       
-                                            <th>Media</th>
-                                            <th>Patients ID</th>
-                                            <th>Name</th>
+                                            <th>Profile</th>
+                                            <th>Ful Name</th>
+                                            <th>Email</th>
+                                            <th>DOB</th>
+                                            <th>Gender</th>
                                             <th>Age</th>
-                                            <th>Address</th>
-                                            <th>Number</th>
-                                            <th>Last Visit</th>
-                                            <th>Status</th>
+                                            <th>Mobile Number</th>
+                                            <th>Appointment Date</th>
+                                            <th>Appointment Time</th>
+                                            <th>Doctor</th>
+                                            <th>Department</th>
+                                            <th>Message</th>
+                                            <th>Mode</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><span class="list-icon"><img class="patients-img" src="../assets/images/xs/avatar1.jpg" alt=""></span></td>
-                                            <td><span class="list-name">KU 00598</span></td>
-                                            <td>Daniel</td>
-                                            <td>32</td>
-                                            <td>71 Pilgrim Avenue Chevy Chase, MD 20815</td>
-                                            <td>404-447-6013</td>
-                                            <td>11 Jan 2018</td>
-                                            <td><span class="badge badge-success">Approved</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="list-icon"><img class="patients-img" src="../assets/images/xs/avatar2.jpg" alt=""></span></td>
-                                            <td><span class="list-name">KU 00258</span></td>
-                                            <td>Alexander</td>
-                                            <td>22</td>
-                                            <td>123 6th St. Melbourne, FL 32904</td>
-                                            <td>404-447-6013</td>
-                                            <td>15 Jan 2018</td>
-                                            <td><span class="badge badge-success">Approved</span></td>
-                                        </tr>                                       
-                                        <tr>
-                                            <td><span class="list-icon"><img class="patients-img" src="../assets/images/xs/avatar1.jpg" alt=""></span></td>
-                                            <td><span class="list-name">KU 00456</span></td>
-                                            <td>Joseph</td>
-                                            <td>27</td>
-                                            <td>70 Bowman St. South Windsor, CT 06074</td>
-                                            <td>404-447-6013</td>
-                                            <td>19 Jan 2018</td>
-                                            <td><span class="badge badge-success">Approved</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="list-icon"><img class="patients-img" src="../assets/images/xs/avatar2.jpg" alt=""></span></td>
-                                            <td><span class="list-name">KU 00789</span></td>
-                                            <td>Cameron</td>
-                                            <td>38</td>
-                                            <td>123 6th St. Melbourne, FL 32904</td>
-                                            <td>404-447-6013</td>
-                                            <td>19 Jan 2018</td>
-                                            <td><span class="badge badge-warning">Pending</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="list-icon"><img class="patients-img" src="../assets/images/xs/avatar3.jpg" alt=""></span></td>
-                                            <td><span class="list-name">KU 00987</span></td>
-                                            <td>Alex</td>
-                                            <td>39</td>
-                                            <td>123 6th St. Melbourne, FL 32904</td>
-                                            <td>404-447-6013</td>
-                                            <td>20 Jan 2018</td>
-                                            <td><span class="badge badge-success">Approved</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="list-icon"><img class="patients-img" src="../assets/images/xs/avatar4.jpg" alt=""></span></td>
-                                            <td><span class="list-name">KU 00951</span></td>
-                                            <td>James</td>
-                                            <td>32</td>
-                                            <td>44 Shirley Ave. West Chicago, IL 60185</td>
-                                            <td>404-447-6013</td>
-                                            <td>22 Jan 2018</td>
-                                            <td><span class="badge badge-warning">Pending</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="list-icon"><img class="patients-img" src="../assets/images/xs/avatar1.jpg" alt=""></span></td>
-                                            <td><span class="list-name">KU 00953</span></td>
-                                            <td>charlie</td>
-                                            <td>51</td>
-                                            <td>123 6th St. Melbourne, FL 32904</td>
-                                            <td>404-447-6013</td>
-                                            <td>22 Jan 2018</td>
-                                            <td><span class="badge badge-warning">Pending</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="list-icon"><img class="patients-img" src="../assets/images/xs/avatar2.jpg" alt=""></span></td>
-                                            <td><span class="list-name">KU 00934</span></td>
-                                            <td>thomas</td>
-                                            <td>26</td>
-                                            <td>123 6th St. Melbourne, FL 32904</td>
-                                            <td>404-447-6013</td>
-                                            <td>29 Jan 2018</td>
-                                            <td><span class="badge badge-warning">Pending</span></td>
-                                        </tr>
+                                        <%pat.forEach(function(pat) { %>
+                                            <tr>
+                                                <td><span class="list-icon"><img class="patients-img" src="../assets/images/xs/avatar1.jpg" alt=""></span></td>
+                                                <td><span class="list-name"><%= pat.pat_fname %> <%= pat.pat_mname %> <%= pat.pat_lname %></span></td>
+                                                <td><%= pat.pat_email %></td>
+                                                <td><%= pat.pat_dob %></td>
+                                                <td><%= pat.pat_gender %></td>
+                                                <td><%= pat.pat_age %></td>
+                                                <td><%= pat.pat_mobileNumber %></td>
+                                                <td style="color: red;"><%= pat.pat_appointmentDate %></td>
+                                                <td style="color: red;"><%= pat.pat_appointmentTime %></td>
+                                                <td><%= pat.sel_doctor %></td>
+                                                <td><%= pat.sel_department %></td>
+                                                <td><%= pat.pat_message %></td>
+                                                <td><%= pat.appoiment_mode %></td>
+                                                
+                                            <!-- <form action="all_appoiment" method="post">
+                                               
+                                                <% if(pat.status == 'pending' ) { %>
+                                                    <td><span class="badge badge-success"> <button name="sent" value="<%= pat.pat_email %>" id="btn" style="border: none; background-color: transparent; color: red;"> Approve</button></span></td>
+                                                    <td><span class="badge badge-success"> <button name="sent" value="<%= pat.pat_email %>" id="btn" style="border: none; background-color: transparent; color: red;"> rejects</button></span></td>
+                                                <% } else { %>
+                                                    <td><span class="badge badge-success"> <button type="button" style="border: none; background-color: transparent; color: green;"> Accepted</button></span></td>
+                                                <% } %>
+                                            </form> -->
+
+                                            <form action="all_appoiment" method="post">
+                                                <% if(pat.status == 'pending') { %>
+                                                    <td>
+                                                        <span class="badge badge-success">
+                                                            <!-- Approve Button -->
+                                                            <button name="action" value="approve" id="btn" style="border: none; background-color: transparent; color: red;">
+                                                                Approve
+                                                            </button>
+                                                            <!-- Hidden email input -->
+                                                            <input type="hidden" name="email" value="<%= pat.pat_email %>">
+                                                        </span>
+                                                    </td>
+                                            
+                                                    <td>
+                                                        <span class="badge badge-success">
+                                                            <!-- Reject Button -->
+                                                            <button name="action" value="reject" id="btn" style="border: none; background-color: transparent; color: red;">
+                                                                Reject
+                                                            </button>
+                                                            <!-- Hidden email input -->
+                                                            <input type="hidden" name="email" value="<%= pat.pat_email %>">
+                                                        </span>
+                                                    </td>
+                                                <% } else if(pat.status == 'approve') { %>
+                                                    <td>
+                                                        <span class="badge badge-success">
+                                                            <button type="button" style="border: none; background-color: transparent; color: green;">
+                                                                Accepted
+                                                            </button>
+                                                        </span>
+                                                    </td>
+                                                <% } else if(pat.status == 'reject') { %>
+                                                    <td>
+                                                        <span class="badge badge-danger">
+                                                            <button type="button" style="border: none; background-color: transparent; color: red;">
+                                                                Rejected
+                                                            </button>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge badge-success">
+                                                            <!-- Approve Button -->
+                                                            <button name="action" value="approve" id="btn" style="border: none; background-color: transparent; color: red;">
+                                                                Approve
+                                                            </button>
+                                                            <!-- Hidden email input -->
+                                                            <input type="hidden" name="email" value="<%= pat.pat_email %>">
+                                                        </span>
+                                                    </td
+                                                <% } %>
+                                            </form>
+                                            
+                                            
+                                            </tr>
+                                        <% }); %>
                                     </tbody>
                                 </table>
                             </div>

@@ -15,6 +15,10 @@ const book_appointment_model = require('../model/book_appointment');
 
 // bnrv hcsh xtnx mzwz
 
+router.get('/appoiment', async function(req, res, next){
+  res.render('appoiment', { title: 'Express' });
+});
+
 /* GET home page. */
 router.get('/', async function(req, res, next){
   res.render('index', { title: 'Express' });
@@ -38,18 +42,6 @@ router.get('/index',async function(req, res, next){
   }
 
   res.render('index', { title: 'Express'});
-});
-
-router.post('/index',async function(req, res, next){
-
-  notifier.notify({
-    title: 'Book Appointment',
-    message: 'Login to Book Appointment',
-    sound: true,
-    wait: true,
-    type: 'info'
-  });
-  res.render('sign_in', { title: 'Express'});
 });
 
 router.get('/home', async function(req, res, next){
@@ -311,23 +303,31 @@ router.get('/book_appointment',async function(req,res){
 router.post('/book_appointment', async function(req, res) {
   try {
       const {
-          pat_name,
-          pat_mobileNumber,
-          pat_age,
-          pat_apoi_date,
-          sel_doctor,
-          sel_department,
-          pat_email
+        pat_fname,
+        pat_mname,
+        pat_lname,
+        pat_email,
+        pat_dob,
+        pat_gender,
+        pat_age,
+        pat_mobileNumber,
+        pat_appointmentDate,
+        pat_appointmentTime,
+        sel_doctor,
+        sel_department,
+        pat_message
       } = req.body;
 
-      if (!pat_name || !pat_mobileNumber || !pat_age || !pat_apoi_date ||
-          !sel_doctor || !sel_department || !pat_email) {
+      if (!pat_fname || !pat_mname || !pat_lname || !pat_email ||
+          !pat_dob || !pat_gender || !pat_age || !pat_mobileNumber || !pat_appointmentDate || !pat_appointmentTime || !sel_doctor || !sel_department || !pat_message) {
           return notifier.notify({
               title: 'Book Appointment',
               message: 'All fields are required',
               sound: true,
               wait: true,
-              type: 'info'
+              type: 'info',
+              gravity: "center", // `top` or `bottom`
+              position: "center", // `left`, `center` or `right`
           });
           // return res.status(400).json({ error: 'All fields are required' });
       }
@@ -356,13 +356,20 @@ router.post('/book_appointment', async function(req, res) {
 
       // Create appointment object
       const obj = {
-          pat_name,
-          pat_mobileNumber,
-          pat_age,
-          pat_apoi_date,
-          sel_doctor,
-          sel_department,
-          pat_email
+        pat_fname,
+        pat_mname,
+        pat_lname,
+        pat_email,
+        pat_dob,
+        pat_gender,
+        pat_age,
+        pat_mobileNumber,
+        pat_appointmentDate,
+        pat_appointmentTime,
+        sel_doctor,
+        sel_department,
+        pat_message,
+        appoiment_mode:'online'
       };
 
       // Save to database
