@@ -43,8 +43,9 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs padding-0">
                             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#All">All</a></li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#USA">USA</a></li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#India">India</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Pending">Pending</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Approve">Approve</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#reject">Reject</a></li>
                         </ul>
                             
                         <!-- Tab panes -->
@@ -153,7 +154,7 @@
                                     </tbody>
                                 </table>                            
                             </div>
-                            <div class="tab-pane table-responsive" id="USA">
+                            <div class="tab-pane table-responsive" id="Pending">
                                 <table class="table m-b-0 table-hover">
                                     <thead>
                                         <tr>                                       
@@ -174,6 +175,7 @@
                                     </thead>
                                     <tbody>
                                         <%pat.forEach(function(pat) { %>
+                                            <%if(pat.status == 'pending'){ %>
                                             <tr>
                                                 <td><span class="list-icon"><img class="patients-img" src="../assets/images/xs/avatar1.jpg" alt=""></span></td>
                                                 <td><span class="list-name"><%= pat.pat_fname %> <%= pat.pat_mname %> <%= pat.pat_lname %></span></td>
@@ -250,9 +252,216 @@
                                                     </td
                                                 <% } %>
                                             </form>
-                                            
-                                            
                                             </tr>
+                                            <% } %>
+                                        <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane table-responsive" id="Approve">
+                                <table class="table m-b-0 table-hover">
+                                    <thead>
+                                        <tr>                                       
+                                            <th>Profile</th>
+                                            <th>Ful Name</th>
+                                            <th>Email</th>
+                                            <th>DOB</th>
+                                            <th>Gender</th>
+                                            <th>Age</th>
+                                            <th>Mobile Number</th>
+                                            <th>Appointment Date</th>
+                                            <th>Appointment Time</th>
+                                            <th>Doctor</th>
+                                            <th>Department</th>
+                                            <th>Message</th>
+                                            <th>Mode</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%pat.forEach(function(pat) { %>
+                                            <%if(pat.status == 'approve'){ %>
+                                            <tr>
+                                                <td><span class="list-icon"><img class="patients-img" src="../assets/images/xs/avatar1.jpg" alt=""></span></td>
+                                                <td><span class="list-name"><%= pat.pat_fname %> <%= pat.pat_mname %> <%= pat.pat_lname %></span></td>
+                                                <td><%= pat.pat_email %></td>
+                                                <td><%= pat.pat_dob %></td>
+                                                <td><%= pat.pat_gender %></td>
+                                                <td><%= pat.pat_age %></td>
+                                                <td><%= pat.pat_mobileNumber %></td>
+                                                <td style="color: red;"><%= pat.pat_appointmentDate %></td>
+                                                <td style="color: red;"><%= pat.pat_appointmentTime %></td>
+                                                <td><%= pat.sel_doctor %></td>
+                                                <td><%= pat.sel_department %></td>
+                                                <td><%= pat.pat_message %></td>
+                                                <td><%= pat.appoiment_mode %></td>
+                                                
+                                            <!-- <form action="all_appoiment" method="post">
+                                               
+                                                <% if(pat.status == 'pending' ) { %>
+                                                    <td><span class="badge badge-success"> <button name="sent" value="<%= pat.pat_email %>" id="btn" style="border: none; background-color: transparent; color: red;"> Approve</button></span></td>
+                                                    <td><span class="badge badge-success"> <button name="sent" value="<%= pat.pat_email %>" id="btn" style="border: none; background-color: transparent; color: red;"> rejects</button></span></td>
+                                                <% } else { %>
+                                                    <td><span class="badge badge-success"> <button type="button" style="border: none; background-color: transparent; color: green;"> Accepted</button></span></td>
+                                                <% } %>
+                                            </form> -->
+
+                                            <form action="all_appoiment" method="post">
+                                                <% if(pat.status == 'pending') { %>
+                                                    <td>
+                                                        <span class="badge badge-success">
+                                                            <!-- Approve Button -->
+                                                            <button name="action" value="approve" id="btn" style="border: none; background-color: transparent; color: red;">
+                                                                Approve
+                                                            </button>
+                                                            <!-- Hidden email input -->
+                                                            <input type="hidden" name="email" value="<%= pat.pat_email %>">
+                                                        </span>
+                                                    </td>
+                                            
+                                                    <td>
+                                                        <span class="badge badge-success">
+                                                            <!-- Reject Button -->
+                                                            <button name="action" value="reject" id="btn" style="border: none; background-color: transparent; color: red;">
+                                                                Reject
+                                                            </button>
+                                                            <!-- Hidden email input -->
+                                                            <input type="hidden" name="email" value="<%= pat.pat_email %>">
+                                                        </span>
+                                                    </td>
+                                                <% } else if(pat.status == 'approve') { %>
+                                                    <td>
+                                                        <span class="badge badge-success">
+                                                            <button type="button" style="border: none; background-color: transparent; color: green;">
+                                                                Accepted
+                                                            </button>
+                                                        </span>
+                                                    </td>
+                                                <% } else if(pat.status == 'reject') { %>
+                                                    <td>
+                                                        <span class="badge badge-danger">
+                                                            <button type="button" style="border: none; background-color: transparent; color: red;">
+                                                                Rejected
+                                                            </button>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge badge-success">
+                                                            <!-- Approve Button -->
+                                                            <button name="action" value="approve" id="btn" style="border: none; background-color: transparent; color: red;">
+                                                                Approve
+                                                            </button>
+                                                            <!-- Hidden email input -->
+                                                            <input type="hidden" name="email" value="<%= pat.pat_email %>">
+                                                        </span>
+                                                    </td
+                                                <% } %>
+                                            </form>
+                                            </tr>
+                                            <% } %>
+                                        <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane table-responsive" id="reject">
+                                <table class="table m-b-0 table-hover">
+                                    <thead>
+                                        <tr>                                       
+                                            <th>Profile</th>
+                                            <th>Ful Name</th>
+                                            <th>Email</th>
+                                            <th>DOB</th>
+                                            <th>Gender</th>
+                                            <th>Age</th>
+                                            <th>Mobile Number</th>
+                                            <th>Appointment Date</th>
+                                            <th>Appointment Time</th>
+                                            <th>Doctor</th>
+                                            <th>Department</th>
+                                            <th>Message</th>
+                                            <th>Mode</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%pat.forEach(function(pat) { %>
+                                            <%if(pat.status == 'reject'){ %>
+                                            <tr>
+                                                <td><span class="list-icon"><img class="patients-img" src="../assets/images/xs/avatar1.jpg" alt=""></span></td>
+                                                <td><span class="list-name"><%= pat.pat_fname %> <%= pat.pat_mname %> <%= pat.pat_lname %></span></td>
+                                                <td><%= pat.pat_email %></td>
+                                                <td><%= pat.pat_dob %></td>
+                                                <td><%= pat.pat_gender %></td>
+                                                <td><%= pat.pat_age %></td>
+                                                <td><%= pat.pat_mobileNumber %></td>
+                                                <td style="color: red;"><%= pat.pat_appointmentDate %></td>
+                                                <td style="color: red;"><%= pat.pat_appointmentTime %></td>
+                                                <td><%= pat.sel_doctor %></td>
+                                                <td><%= pat.sel_department %></td>
+                                                <td><%= pat.pat_message %></td>
+                                                <td><%= pat.appoiment_mode %></td>
+                                                
+                                            <!-- <form action="all_appoiment" method="post">
+                                               
+                                                <% if(pat.status == 'pending' ) { %>
+                                                    <td><span class="badge badge-success"> <button name="sent" value="<%= pat.pat_email %>" id="btn" style="border: none; background-color: transparent; color: red;"> Approve</button></span></td>
+                                                    <td><span class="badge badge-success"> <button name="sent" value="<%= pat.pat_email %>" id="btn" style="border: none; background-color: transparent; color: red;"> rejects</button></span></td>
+                                                <% } else { %>
+                                                    <td><span class="badge badge-success"> <button type="button" style="border: none; background-color: transparent; color: green;"> Accepted</button></span></td>
+                                                <% } %>
+                                            </form> -->
+
+                                            <form action="all_appoiment" method="post">
+                                                <% if(pat.status == 'pending') { %>
+                                                    <td>
+                                                        <span class="badge badge-success">
+                                                            <!-- Approve Button -->
+                                                            <button name="action" value="approve" id="btn" style="border: none; background-color: transparent; color: red;">
+                                                                Approve
+                                                            </button>
+                                                            <!-- Hidden email input -->
+                                                            <input type="hidden" name="email" value="<%= pat.pat_email %>">
+                                                        </span>
+                                                    </td>
+                                            
+                                                    <td>
+                                                        <span class="badge badge-success">
+                                                            <!-- Reject Button -->
+                                                            <button name="action" value="reject" id="btn" style="border: none; background-color: transparent; color: red;">
+                                                                Reject
+                                                            </button>
+                                                            <!-- Hidden email input -->
+                                                            <input type="hidden" name="email" value="<%= pat.pat_email %>">
+                                                        </span>
+                                                    </td>
+                                                <% } else if(pat.status == 'approve') { %>
+                                                    <td>
+                                                        <span class="badge badge-success">
+                                                            <button type="button" style="border: none; background-color: transparent; color: green;">
+                                                                Accepted
+                                                            </button>
+                                                        </span>
+                                                    </td>
+                                                <% } else if(pat.status == 'reject') { %>
+                                                    <td>
+                                                        <span class="badge badge-danger">
+                                                            <button type="button" style="border: none; background-color: transparent; color: red;">
+                                                                Rejected
+                                                            </button>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge badge-success">
+                                                            <!-- Approve Button -->
+                                                            <button name="action" value="approve" id="btn" style="border: none; background-color: transparent; color: red;">
+                                                                Approve
+                                                            </button>
+                                                            <!-- Hidden email input -->
+                                                            <input type="hidden" name="email" value="<%= pat.pat_email %>">
+                                                        </span>
+                                                    </td
+                                                <% } %>
+                                            </form>
+                                            </tr>
+                                            <% } %>
                                         <% }); %>
                                     </tbody>
                                 </table>
