@@ -3,31 +3,21 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const session = require("express-session");
-const flash = require("connect-flash");
+const session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
 
-// app.use(session({
-//   secret: 'secret',
-//   cookie: {maxAge: 60000},
-//   resave: false,
-//   saveUninitialized: false,
-// }));
-// app.use(flash());
-
-app.use(cookieParser('keyboard cat'));
-app.use(session({
-  secret: 'keyboard cat', // A secret key for signing cookies
-  resave: false, // Don't save session if unmodified
-  saveUninitialized: true, // Save uninitialized sessions
-  cookie: { maxAge: 60000 } // Set session cookie max age
-}));
-app.use(flash());
-
+app.use(
+  session({
+      secret: 'your-secret-key',
+      resave: false,           
+      saveUninitialized: true, 
+      cookie: { secure: true, maxAge: 60000}
+  })
+);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
