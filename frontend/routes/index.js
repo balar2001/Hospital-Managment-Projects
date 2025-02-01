@@ -9,6 +9,7 @@ var notifier = new WindowsBalloon({
   customPath: undefined 
 });
 
+
 const signUpModel = require('../model/signUp');
 const book_appointment_model = require('../model/book_appointment');
 
@@ -21,39 +22,45 @@ router.get('/', async function(req, res, next){
 
 router.get('/index',async function(req, res, next){
 
-  await storage.init();
-  var id = await storage.getItem('user_id');
-  console.log("............................."+id);
-  
-  if(typeof id === 'undefined') {
-    res.redirect('index')
-  } else {
-    res.redirect('home')
-  }
+  notifier.notify(
+    {
+      title: 'Information message',
+      message: 'If you bok apoiment than first login ',
+      sound: true,
+      wait: true,
+      type: 'info',
+      
+    });
 
   res.render('index', { title: 'Express'});
+
 });
 
 router.get('/home', async function(req, res, next){
 
   try {
-    await storage.init();
 
-    var profile =  await storage.getItem('user_name');
-    console.log(req.session.otp);
-    const dataString = JSON.stringify(req.session.ses);
-    const data = JSON.parse(dataString);
+    var profile =  req.session?.user?.name;
+    console.log("Session Data:", profile);
 
-    if (!data) {
-        console.log("Session is empty or undefined.");
-    } else {
-        console.log("Session user ID:", data._id);
+    if(!profile){
+      notifier.notify(
+        {
+          title: 'Alert message',
+          message: 'Sign in First',
+          sound: true,
+          wait: true,
+          type: 'warn', //info | warn | error
+        });
+      
+      res.redirect('/sign_in');
     }
 
-
     res.render('home', { profile});
+
   } catch (error) {
-    
+    console.error(error);
+    res.status(500).send('Internal Server Error');
   }
 });
 
@@ -77,60 +84,61 @@ router.post('/sign_in', async function(req, res, next){
         await storage.setItem('loginOtp', otp);
         req.session.otp = otp;
         console.log(otp);
-
-        req.session.findUser = findUser;
-        const userData = req.session.findUser
-        console.log("dsdsdsd"+userData[0]._id);
+        req.session.user = {
+          id: findUser[0]._id,
+          name: findUser[0].user_name,
+          email: findUser[0].user_email
+        };
         
       //email
-      if (findUser !== '') {
-          var nodemailer = require('nodemailer');
+      // if (findUser !== '') {
+      //     var nodemailer = require('nodemailer');
       
-          var transporter = nodemailer.createTransport({
-              service: 'gmail',
-              auth: {
-                  user: '24ic03ca037@ppsu.ac.in',
-                  pass: 'bnrv hcsh xtnx mzwz'
-              }
-          });
+      //     var transporter = nodemailer.createTransport({
+      //         service: 'gmail',
+      //         auth: {
+      //             user: '24ic03ca037@ppsu.ac.in',
+      //             pass: 'bnrv hcsh xtnx mzwz'
+      //         }
+      //     });
       
-          var mailOptions = {
-              from: '24ic03ca037@ppsu.ac.in',
-              to: user_email,
-              subject: 'Oreo Hospital Management - Login Verification',
-              html: `
-              <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
-                  <header style="text-align: center; background-color: #04CFD1; color: white; padding: 10px; border-radius: 8px 8px 0 0;">
-                      <h1>Oreo Hospital Management</h1>
-                  </header>
-                  <main style="padding: 20px;">
-                      <h2 style="color: #4CAF50;">Login Verification</h2>
-                      <p>Dear ${findUser.user_name},</p>
-                      <p>We received a login request for your account. Please use the following OTP to verify your identity:</p>
-                      <div style="text-align: center; margin: 20px 0;">
-                          <span style="font-size: 24px; font-weight: bold; color: #04CFD1;">${otp}</span>
-                      </div>
-                      <p>The OTP is valid for the next 10 minutes. If you did not request this login, please ignore this email or contact us immediately.</p>
-                  </main>
-                  <footer style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #555;">
-                      <p>Thank you for choosing Oreo Hospital Management.</p>
-                      <p>&copy; ${new Date().getFullYear()} Oreo Hospital Management. All rights reserved.</p>
-                  </footer>
-              </div>
-              `
-          };
+      //     var mailOptions = {
+      //         from: '24ic03ca037@ppsu.ac.in',
+      //         to: user_email,
+      //         subject: 'Oreo Hospital Management - Login Verification',
+      //         html: `
+      //         <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
+      //             <header style="text-align: center; background-color: #04CFD1; color: white; padding: 10px; border-radius: 8px 8px 0 0;">
+      //                 <h1>Oreo Hospital Management</h1>
+      //             </header>
+      //             <main style="padding: 20px;">
+      //                 <h2 style="color: #4CAF50;">Login Verification</h2>
+      //                 <p>Dear ${findUser.user_name},</p>
+      //                 <p>We received a login request for your account. Please use the following OTP to verify your identity:</p>
+      //                 <div style="text-align: center; margin: 20px 0;">
+      //                     <span style="font-size: 24px; font-weight: bold; color: #04CFD1;">${otp}</span>
+      //                 </div>
+      //                 <p>The OTP is valid for the next 10 minutes. If you did not request this login, please ignore this email or contact us immediately.</p>
+      //             </main>
+      //             <footer style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #555;">
+      //                 <p>Thank you for choosing Oreo Hospital Management.</p>
+      //                 <p>&copy; ${new Date().getFullYear()} Oreo Hospital Management. All rights reserved.</p>
+      //             </footer>
+      //         </div>
+      //         `
+      //     };
       
-          transporter.sendMail(mailOptions, function (error, info) {
-              if (error) {
-                  console.log(error);
-              } else {
-                  console.log('Email sent: ' + info.response);
-                  // Save or handle the OTP as needed, e.g., store it in the database for verification
-              }
-          });
-      } else {
-          res.send('Please check your email ID');
-      }
+      //     transporter.sendMail(mailOptions, function (error, info) {
+      //         if (error) {
+      //             console.log(error);
+      //         } else {
+      //             console.log('Email sent: ' + info.response);
+      //             // Save or handle the OTP as needed, e.g., store it in the database for verification
+      //         }
+      //     });
+      // } else {
+      //     res.send('Please check your email ID');
+      // }
       
 
         // req.flash('message', 'Login successful');
@@ -254,11 +262,30 @@ router.post('/sign_up',async function(req,res,next){
 })
 
 router.get('/logout',async function(req,res){
-
-  await storage.init();
-  await storage.clear();
-
-  res.redirect('/')
+  req.session.destroy((err) => {
+    if (err) {
+      // console.error("Error destroying session:", err);
+      // return res.status(500).send("Error logging out"); 
+      return notifier.notify(
+        {
+          title: 'Alert message',
+          message: 'Log out not successfully',
+          sound: true,
+          wait: true,
+           type: 'info' 
+        });
+    }
+    notifier.notify(
+      {
+        title: 'Alert message',
+        message: 'Log out successfully',
+        sound: true,
+        wait: true,
+         type: 'info' 
+      });
+    res.clearCookie('connect.sid');
+    return res.redirect('/sign_in');
+  });
 
 })
 
