@@ -1,17 +1,35 @@
 const mongoose = require('mongoose');
 
 const book_appointment_data = new mongoose.Schema({
-    pat_name:{
+    pat_fname:{
         type:String,
     },
-    pat_mobileNumber:{
+    pat_mname:{
+        type:String,
+    },
+    pat_lname:{
+        type:String,
+    },
+    pat_email:{
+        type:String,
+    },
+    pat_dob:{
+        type:String,
+    },
+    pat_gender:{
         type:String,
     },
     pat_age:{
         type:String,
     },
-    pat_apoi_date:{
-        type:String,
+    pat_mobileNumber:{
+        type:String
+    },
+    pat_appointmentDate:{
+        type:String
+    },
+    pat_appointmentTime:{
+        type:String
     },
     sel_doctor:{
         type:String,
@@ -19,15 +37,19 @@ const book_appointment_data = new mongoose.Schema({
     sel_department:{
         type:String
     },
-    pat_email:{
-        type:String
+    pat_message:{
+        type:String,
     },
     status:{
         type:String,
         default: 'pending',
         enum: ['pending', 'approve','reject']
     },
-
+    appoiment_mode:{
+        type:String,
+        default: 'null',
+        enum: ['online', 'ofline']
+    }
   },
   {
     timestamps: true
