@@ -91,58 +91,53 @@ router.post('/sign_in', async function(req, res, next){
         };
         
       //email
-      // if (findUser !== '') {
-      //     var nodemailer = require('nodemailer');
+      if (findUser !== '') {
+          var nodemailer = require('nodemailer');
       
-      //     var transporter = nodemailer.createTransport({
-      //         service: 'gmail',
-      //         auth: {
-      //             user: '24ic03ca037@ppsu.ac.in',
-      //             pass: 'bnrv hcsh xtnx mzwz'
-      //         }
-      //     });
+          var transporter = nodemailer.createTransport({
+              service: 'gmail',
+              auth: {
+                  user: '24ic03ca037@ppsu.ac.in',
+                  pass: 'bnrv hcsh xtnx mzwz'
+              }
+          });
       
-      //     var mailOptions = {
-      //         from: '24ic03ca037@ppsu.ac.in',
-      //         to: user_email,
-      //         subject: 'Oreo Hospital Management - Login Verification',
-      //         html: `
-      //         <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
-      //             <header style="text-align: center; background-color: #04CFD1; color: white; padding: 10px; border-radius: 8px 8px 0 0;">
-      //                 <h1>Oreo Hospital Management</h1>
-      //             </header>
-      //             <main style="padding: 20px;">
-      //                 <h2 style="color: #4CAF50;">Login Verification</h2>
-      //                 <p>Dear ${findUser.user_name},</p>
-      //                 <p>We received a login request for your account. Please use the following OTP to verify your identity:</p>
-      //                 <div style="text-align: center; margin: 20px 0;">
-      //                     <span style="font-size: 24px; font-weight: bold; color: #04CFD1;">${otp}</span>
-      //                 </div>
-      //                 <p>The OTP is valid for the next 10 minutes. If you did not request this login, please ignore this email or contact us immediately.</p>
-      //             </main>
-      //             <footer style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #555;">
-      //                 <p>Thank you for choosing Oreo Hospital Management.</p>
-      //                 <p>&copy; ${new Date().getFullYear()} Oreo Hospital Management. All rights reserved.</p>
-      //             </footer>
-      //         </div>
-      //         `
-      //     };
+          var mailOptions = {
+              from: '24ic03ca037@ppsu.ac.in',
+              to: user_email,
+              subject: 'Oreo Hospital Management - Login Verification',
+              html: `
+              <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
+                  <header style="text-align: center; background-color: #04CFD1; color: white; padding: 10px; border-radius: 8px 8px 0 0;">
+                      <h1>Oreo Hospital Management</h1>
+                  </header>
+                  <main style="padding: 20px;">
+                      <h2 style="color: #4CAF50;">Login Verification</h2>
+                      <p>Dear ${findUser.user_name},</p>
+                      <p>We received a login request for your account. Please use the following OTP to verify your identity:</p>
+                      <div style="text-align: center; margin: 20px 0;">
+                          <span style="font-size: 24px; font-weight: bold; color: #04CFD1;">${otp}</span>
+                      </div>
+                      <p>The OTP is valid for the next 10 minutes. If you did not request this login, please ignore this email or contact us immediately.</p>
+                  </main>
+                  <footer style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #555;">
+                      <p>Thank you for choosing Oreo Hospital Management.</p>
+                      <p>&copy; ${new Date().getFullYear()} Oreo Hospital Management. All rights reserved.</p>
+                  </footer>
+              </div>
+              `
+          };
       
-      //     transporter.sendMail(mailOptions, function (error, info) {
-      //         if (error) {
-      //             console.log(error);
-      //         } else {
-      //             console.log('Email sent: ' + info.response);
-      //             // Save or handle the OTP as needed, e.g., store it in the database for verification
-      //         }
-      //     });
-      // } else {
-      //     res.send('Please check your email ID');
-      // }
-      
-
-        // req.flash('message', 'Login successful');
-        // res.redirect('/home');
+          transporter.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                  console.log(error);
+              } else {
+                  console.log('Email sent: ' + info.response);
+              }
+          });
+      } else {
+          res.send('Please check your email ID');
+      }
         
         res.redirect('/otp');
 
@@ -154,7 +149,7 @@ router.post('/sign_in', async function(req, res, next){
             message: 'Wrong username or password',
             sound: true,
             wait: true,
-             type: 'info' 
+            type: 'info' 
           });
         res.redirect('/sign_in');
       }
@@ -395,16 +390,208 @@ router.post('/book_appointment', async function(req, res) {
         appoiment_mode:'online'
       };
 
-      // Save to database
+
+      let fname = obj.pat_fname.toString();
+      let mname = obj.pat_mname.toString();
+      let lame = obj.pat_lname.toString();
+      let email = obj.pat_email.toString();
+      let mobileNumber = obj.pat_mobileNumber.toString();
+      let appointmentTime = obj.pat_appointmentTime.toString();
+      let doctor = obj.sel_doctor.toString();
+      let department = obj.sel_department.toString();
+
       const patData = await book_appointment_model.create(obj);
+
+      if (patData !== '') {
+        var nodemailer = require('nodemailer');
+    
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: '24ic03ca037@ppsu.ac.in',
+                pass: 'bnrv hcsh xtnx mzwz'
+            }
+        });
+    
+      var mailOptions = {
+          from: '24ic03ca037@ppsu.ac.in',
+          to: email,
+          subject: 'Appointment Confirmation - Oreo Hospital',
+          html: `
+          <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
+              <header style="text-align: center; background-color: #04CFD1; color: white; padding: 10px; border-radius: 8px 8px 0 0;">
+                  <h1>Oreo Hospital</h1>
+                  <p>Your Health, Our Priority</p>
+              </header>
+              <main style="padding: 20px;">
+                  <h2 style="color: #04CFD1;">Appointment Confirmed</h2>
+                  <p>Dear <strong>${fname} ${mname} ${lame}</strong>,</p>
+                  <p>Your appointment has been successfully booked with the following details:</p>
+                  <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px;">
+                      <p><strong>Doctor:</strong> ${doctor}</p>
+                      <p><strong>Department:</strong> ${department}</p>
+                      <p><strong>Appointment Date & Time:</strong> ${appointmentTime}</p>
+                      <p><strong>Mobile Number:</strong> ${mobileNumber}</p>
+                      <p><strong>Email:</strong> ${email}</p>
+                  </div>
+                  <p>If you have any questions, please contact our support team.</p>
+                  <p>We look forward to serving you!</p>
+              </main>
+              <footer style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #555;">
+                  <p>Thank you for choosing Oreo Hospital.</p>
+                  <p>&copy; ${new Date().getFullYear()} Oreo Hospital. All rights reserved.</p>
+              </footer>
+          </div>
+          `
+      };
+      
+    
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+              notifier.notify({
+                title: 'Book Appointment',
+                message: 'Appointment Set Successfully',
+                sound: true,
+                wait: true,
+                type: 'info'
+                });
+                console.log('Email sent: ' + info.response);
+            }
+        });
+      } else {
+          res.send('Please check your email ID');
+      }
+
       console.log(patData);
 
-      return res.redirect('/home'); // Ensure no further response is sent
+      return res.redirect('/home');
   } catch (error) {
       console.error('Error:', error);
       res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
+router.get('/services',async function(req,res){
+  res.render('services')
+})
+
+router.get('/departments',async function(req,res){
+  res.render('departments')
+})
+
+router.get('/forgotPassword',async function(req,res){
+  res.render('forgotPassword')
+})
+
+router.post('/forgotPassword', async function(req, res) {
+  try {
+    await storage.init();
+    const { userEmail } = req.body;
+    const findMail = await signUpModel.find({ user_email: userEmail });
+
+    if (findMail.length === 0) {
+      notifier.notify({
+        title: 'Alert message',
+        message: 'Email not found',
+        sound: true,
+        wait: true,
+        type: 'error' 
+      });
+
+      return res.redirect('/sign_in');
+    } else {
+      var Forgototp = Math.floor(100000 + Math.random() * 900000);
+      await storage.setItem('otpForForgot', Forgototp);
+      console.log("jjjiiuiuiuiuiuiuiuiuiuiuiu"+Forgototp);
+      return res.redirect('/otpForgot');
+    }
+
+
+  } catch (error) {
+    console.error("Error in forgotPassword route:", error);
+    res.status(500).send("Internal Server Error"); // Handle errors properly
+  }
+});
+
+router.get('/otpForgot',async function(req,res){
+  res.render('otpForgot')
+})
+
+router.post('/otpForgot',async function(req,res){
+  try {
+    await storage.init();
+    const {user_otp}= req.body;
+    const otpForForgot = await storage.getItem('otpForForgot');
+
+    if(otpForForgot == user_otp){
+      notifier.notify({
+        title: 'Alert message',
+        message: 'OTP Match',
+        sound: true,
+        wait: true,
+        type: 'info' 
+      });
+      return res.redirect('/resetPassword');
+    } else {
+      notifier.notify({
+        title: 'Alert message',
+        message: 'OTP not match please check',
+        sound: true,
+        wait: true,
+        type: 'error' 
+      });
+      return res.redirect('/forgotPassword');
+    }
+  } catch (error) {
+    console.error("Error in forgotPassword route:", error);
+    res.status(500).send("Internal Server Error"); 
+  }
+  
+})
+
+router.get('/resetPassword',async function(req,res){
+  res.render('resetPassword')
+})
+
+router.get('/loginHeader',async function(req,res){
+  res.render('loginHeader')
+})
+
+router.get('/navbar',async function(req,res){
+  res.render('navbar')
+})
+
+router.get('/doctors',async function(req,res){
+  res.render('doctors')
+})
+
+router.get('/blog',async function(req,res){
+  res.render('blog')
+})
+
+router.get('/blogDetail',async function(req,res){
+  res.render('blogDetail')
+})
+router.get('/about',async function(req,res){
+  res.render('about')
+})
+
+router.get('/faq',async function(req,res){
+  res.render('faq')
+})
+
+router.get('/galary',async function(req,res){
+  res.render('galary')
+})
+
+router.get('/pricelist',async function(req,res){
+  res.render('pricelist')
+})
+
+router.get('/contact',async function(req,res){
+  res.render('contact')
+})
 
 module.exports = router;

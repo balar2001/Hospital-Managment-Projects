@@ -41,14 +41,6 @@
                                 </ul>
                             </div>
                         </div>
-                        <!-- <div class="col-lg-6 col-md-5">
-                            <div class="text-right d-none d-md-block">
-                                <ul class="list-unstyled m-b-0">
-                                    <li><a href="sign_in" class="btn btn-link">Sign in</a> <a href="sign_up" class="btn btn-link">sign
-                                        up</a></li>
-                                </ul>
-                            </div>
-                        </div> -->
                         <div class="col-lg-6 col-md-5">
                             <div class="text-right d-none d-md-block">
                                 <ul class="list-unstyled m-b-0">
@@ -84,49 +76,7 @@
                 </div>
             </div>
         </header>
-        <div id="navbar" data-aos="fade-down">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse"
-                            data-target="#navbarMenu" aria-expanded="false" aria-label="Toggle navigation"><span
-                            class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarMenu">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item"><a class="nav-link" href="appoiment">Services</a></li>
-                            <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
-                            <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="pageMenuLink"
-                                   data-toggle="dropdown" aria-haspopup="true"
-                                   aria-expanded="false">Blog</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="blog.html">Blog</a>
-                                    <a class="dropdown-item" href="blog-detail.html">Blog Detail</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="pageMenuLink"
-                                   data-toggle="dropdown" aria-haspopup="true"
-                                   aria-expanded="false">Pages</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="about.html">About Us</a>
-                                    <a class="dropdown-item" href="faq.html">FAQs</a>
-                                    <a class="dropdown-item" href="galary.html">Galary</a>
-                                    <a class="dropdown-item" href="price-list.html">Price list</a>
-                                </div>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
-                            <li class="nav-item d-md-none d-lg-none d-xl-none"><a class="nav-link" href="javascript:void(0);">Sign in</a></li>
-                            <li class="nav-item d-md-none d-lg-none d-xl-none"><a class="nav-link" href="javascript:void(0);">Sign up</a></li>
-                        </ul>
-                        <form class="form-inline my-2 my-lg-0 d-none d-lg-inline-block">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        </form>
-                    </div>
-                </nav>
-            </div>
-        </div>
+        <%-include('navbar.ejs')-%>
     </div>
 
     <!-- start hero -->
@@ -139,74 +89,6 @@
                     <p class="sub-title">Contrary to popular belief, Lorem Ipsum is not simply random text.</p><br>
                     <button class="btn btn-primary btn-round">View More</button>
                 </div>
-                <!-- <form action="book_appointment" method="post" id="appointmentForm" >
-                    <div class="slider_form row">
-                        <p class="col-12">Make an Appointment</p>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="form-group">
-                                <input type="text" value="" placeholder="Enter Name" class="form-control m-b-15" name="pat_name">
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-6">
-                            <div class="form-group">
-                                <input type="text" value="" placeholder="Enter Mobile" class="form-control m-b-15" name="pat_mobileNumber">
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-6">
-                            <div class="form-group">
-                                <input type="text" value="" placeholder="Enter Age" class="form-control m-b-15" name="pat_age">
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-6">
-                            <div class="form-group">
-                                <input type="date" value="" placeholder="Enter Date" class="form-control m-b-15" name="pat_apoi_date">
-                            </div>
-                        </div>
-                        <div class="col-slg-4 col-md-6 col-6">
-                            <select class="form-control m-b-15" name="sel_doctor">
-                                <option selected="selected">Select Doctor</option>
-                                <option>Marc Parcival</option>
-                                <option>Alen Bailey</option>
-                                <option>Basil Andrew</option>
-                                <option>Giles Franklin</option>
-                                <option>Edgar Denzil</option>
-                                <option>Garfield Feris</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-6">
-                            <select class="form-control" name="sel_department">
-                                <option selected="selected">Select Department</option>
-                                <option>Cardiology</option>
-                                <option>Pulmonology</option>
-                                <option>Gynecology</option>
-                                <option>Neurology</option>
-                                <option>Urology</option>
-                                <option>Gastrology</option>
-                                <option>Pediatrician</option>
-                                <option>Laboratory</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-6">
-                            <div class="form-group">
-                                <input type="text" value="" placeholder="Enter email ID" class="form-control m-b-15" name="pat_email">
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <form action="https://thememakker.com/" id="frmFileUpload" class="dropzone" method="post" enctype="multipart/form-data">
-                                <div class="dz-message">
-                                    <div class="drag-icon-cph"> <i class="material-icons">touch_app</i> </div>
-                                    <h3>Drop files here or click to upload.</h3>
-                                    <em>(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</em> </div>
-                                <div class="fallback">
-                                    <input name="file" type="file" multiple />
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <input type="submit" class="btn btn-primary btn-round btn-block m-t-0 m-b-0" style="margin-top: 30px;" value="submit" name="sent" >
-                        </div>
-                    </div>
-                </form> -->
                 <form action="book_appointment" method="post" id="appointmentForm">
                     <div class="slider_form row" style="border-radius: 20px;">
                         <p class="col-12 text-center w-100" style="font-size: 25px; font-weight: 500;">Make an Appointment</p>
