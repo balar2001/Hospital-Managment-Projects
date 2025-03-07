@@ -1517,7 +1517,7 @@ router.post('/updatePatient', async function(req, res, next) {
       sel_doctor : sel_doctor,
       department : department,
       pat_message : pat_message,
-    },{new: true})
+    },{new: true} )
 
     if(UpdateData){
 

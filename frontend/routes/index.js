@@ -757,14 +757,14 @@ router.post('/resetPassword',async function(req,res){
     );
 
      if(updateUserPassword){
-          notifier.notify({
-            title: 'Alert message',
-            message: 'Password Update successfully',
-            sound: true,
-            wait: true,
-            type: 'info' 
-          });
-          return res.redirect('/sign_in');
+        notifier.notify({
+          title: 'Alert message',
+          message: 'Password Update successfully',
+          sound: true,
+          wait: true,
+          type: 'info' 
+        });
+        return res.redirect('/sign_in');
      } else {
       notifier.notify({
         title: 'Alert message',
