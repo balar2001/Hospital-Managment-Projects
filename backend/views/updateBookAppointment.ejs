@@ -1,0 +1,211 @@
+<%-include('header.ejs')-%>
+
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-5 col-sm-12">
+                <h2>Book Appointment
+                    <small>Welcome to Oreo</small>
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-7 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Oreo</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Appointment</a></li>
+                    <li class="breadcrumb-item active">Book Appointment</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Book</strong> Appointment <small>Please fill in the details below.</small></h2>
+                    </div>
+                    <div class="body">
+                        <form action="updatePatient" method="post">
+                            <!-- First Name, Middle Name, Last Name, and Email -->
+                            <div class="row mb-4">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="first-name">First Name</label>
+                                        <input type="text" class="form-control" id="first-name" placeholder="First Name" name="pat_fname" value="<%= findPAT.pat_fname %>" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="middle-name">Middle Name</label>
+                                        <input type="text" class="form-control" id="middle-name" placeholder="Middle Name" name="pat_mname" value="<%= findPAT.pat_mname %>">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="last-name">Last Name</label>
+                                        <input type="text" class="form-control" id="last-name" placeholder="Last Name" name="pat_lname" value="<%= findPAT.pat_lname %>"  required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" id="email" placeholder="Email" name="pat_email" value="<%= findPAT.pat_email %>" required>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <!-- Date of Birth, Gender, Age, and Phone -->
+                            <div class="row mb-4">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="dob">Date of Birth</label>
+                                        <input type="date" class="form-control" id="dob" name="pat_dob" value="<%= findPAT.pat_dob %>" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="gender">Gender</label>
+                                        <select class="form-control" id="gender" name="pat_gender" required>
+                                            <option value="" disabled>Select Gender</option>
+                                            <option value="Male" <%= findPAT.pat_gender === 'Male' ? 'selected' : '' %>>Male</option>
+                                            <option value="Female" <%= findPAT.pat_gender === 'Female' ? 'selected' : '' %>>Female</option>
+                                            <option value="Other" <%= findPAT.pat_gender === 'Other' ? 'selected' : '' %>>Other</option>
+                                        </select>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="age">Age</label>
+                                        <input type="number" class="form-control" id="age" placeholder="Age" name="pat_age" value="<%= findPAT.pat_age %>" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label>
+                                        <input type="tel" class="form-control" id="phone" placeholder="Phone" name="pat_mobileNumber" value="<%= findPAT.pat_mobileNumber %>"required>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <!-- Appointment Date and Time Slot -->
+                            <div class="row mb-4">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="appointment-date">Appointment Date</label>
+                                        <input type="datetime-local" class="form-control" id="appointment-date" name="pat_appointmentDate" value="<%= findPAT.pat_appointmentDate %>" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label style="margin-left: 10px;">Appointment Time Sloat</label>
+                                    <select class="form-control" name="pat_appointmentTime">
+                                        <option selected="selected">Select Time Slot</option>
+                                        <option value="09:00-09:30" <%= findPAT.pat_appointmentTime === '09:00-09:30' ? 'selected' : '' %>>09:00 AM - 09:30 AM</option>
+                                        <option value="09:30-10:00" <%= findPAT.pat_appointmentTime === '09:30-10:00' ? 'selected' : '' %>>09:30 AM - 10:00 AM</option>
+                                        <option value="10:00-10:30" <%= findPAT.pat_appointmentTime === '10:00-10:30' ? 'selected' : '' %>>10:00 AM - 10:30 AM</option>
+                                        <option value="10:30-11:00" <%= findPAT.pat_appointmentTime === '10:30-11:00' ? 'selected' : '' %>>10:30 AM - 11:00 AM</option>
+                                        <option value="11:00-11:30" <%= findPAT.pat_appointmentTime === '11:00-11:30' ? 'selected' : '' %>>11:00 AM - 11:30 AM</option>
+                                        <option value="11:30-12:00" <%= findPAT.pat_appointmentTime === '11:30-12:00' ? 'selected' : '' %>>11:30 AM - 12:00 PM</option>
+                                        <option value="02:00-02:30" <%= findPAT.pat_appointmentTime === '02:00-02:30' ? 'selected' : '' %>>02:00 PM - 02:30 PM</option>
+                                        <option value="02:30-03:00" <%= findPAT.pat_appointmentTime === '02:30-03:00' ? 'selected' : '' %>>02:30 PM - 03:00 PM</option>
+                                        <option value="03:00-03:30" <%= findPAT.pat_appointmentTime === '03:00-03:30' ? 'selected' : '' %>>03:00 PM - 03:30 PM</option>
+                                        <option value="03:30-04:00" <%= findPAT.pat_appointmentTime === '03:30-04:00' ? 'selected' : '' %>>03:30 PM - 04:00 PM</option>
+                                    </select>
+                                    
+                                </div>
+                            </div>
+    
+                            <!-- Doctor and Department Selection -->
+                            <!-- <div class="row mb-4">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="doctor">Doctor</label>
+                                        <select class="form-control" id="doctor" name="sel_doctor" required>
+                                            <option value="" disabled selected>Select Doctor</option>
+                                            <option>Marc Parcival</option>
+                                            <option>Alen Bailey</option>
+                                            <option>Basil Andrew</option>
+                                            <option>Giles Franklin</option>
+                                            <option>Edgar Denzil</option>
+                                            <option>Garfield Feris</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="department">Department</label>
+                                        <select class="form-control" id="department" name="sel_department" required>
+                                            <option value="" disabled selected>Select Department</option>
+                                            <option>Cardiology</option>
+                                            <option>Pulmonology</option>
+                                            <option>Gynecology</option>
+                                            <option>Neurology</option>
+                                            <option>Urology</option>
+                                            <option>Gastrology</option>
+                                            <option>Pediatrician</option>
+                                            <option>Laboratory</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="row mb-4">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="doctor">Doctor</label>
+                                        <select class="form-control" name="sel_doctor" id="sel_doctor">
+                                            <option value="" disabled>Select Doctor</option>
+                                            <% allDoctor.forEach(function(doctor) { %>
+                                                <option value="<%= doctor.docFname + ' ' + doctor.docLname %>" 
+                                                        data-speciality="<%= doctor.docSpeciality %>" 
+                                                        <%= (findPAT.sel_doctor === doctor.docFname + ' ' + doctor.docLname) ? 'selected' : '' %>>
+                                                    <%= doctor.docFname %> <%= doctor.docLname %> - <%= doctor.docSpeciality %>
+                                                </option>
+                                            <% }); %>
+                                        </select>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label style="margin-left: 10px;">Department</label>
+                                        <input type="text" class="form-control" name="department" id="department" 
+                                               placeholder="Auto-filled Department" value="<%= findPAT.department %>" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                document.getElementById("sel_doctor").addEventListener("change", function() {
+                                    var selectedOption = this.options[this.selectedIndex];
+                                    var selectedSpeciality = selectedOption.getAttribute("data-speciality");
+                                    document.getElementById("department").value = selectedSpeciality; // Auto-fill department
+                                });
+                            </script>
+
+                            <!-- Message -->
+                            <div class="row mb-4">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea rows="4" class="form-control" id="message" placeholder="Please type what you want..." name="pat_message" required><%= findPAT.pat_message %></textarea>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <!-- Submit and Cancel Buttons -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-primary btn-round">Update</button>
+                                    <button type="reset" class="btn btn-default btn-round btn-simple">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%-include('footer.ejs')-%>

